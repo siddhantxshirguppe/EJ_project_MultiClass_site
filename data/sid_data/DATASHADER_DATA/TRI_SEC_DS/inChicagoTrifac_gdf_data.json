@@ -1,0 +1,218 @@
+{
+  "source": {
+    "filename": "sid_data/inChicagoTrifac_gdf.csv",
+    "type": "csv",
+    "rows": 74
+  },
+  "projection": {
+    "type": "EPSG:4326"
+  },
+  "encoding": {
+    "x": {
+      "field": "long",
+      "type": "latitude",
+      "bin": {
+        "maxbins": 512
+      },
+      "aggregate": "count",
+      "scale": {
+        "domain": [
+          -87.9401140825235,
+          -87.52413710389523
+        ],
+        "range": [
+          0,
+          512
+        ]
+      }
+    },
+    "y": {
+      "field": "lat",
+      "type": "longitude",
+      "bin": {
+        "maxbins": 465
+      },
+      "aggregate": "count",
+      "scale": {
+        "domain": [
+          41.644543121506054,
+          42.023038586147585
+        ],
+        "range": [
+          0,
+          465
+        ]
+      }
+    },
+    "z": {
+      "field": "sector",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Beverages",
+          "Chemical Wholesalers",
+          "Chemicals",
+          "Computers and Electronic Products",
+          "Electrical Equipment",
+          "Fabricated Metals",
+          "Food",
+          "Hazardous Waste",
+          "Miscellaneous Manufacturing",
+          "Nonmetallic Mineral Product",
+          "Paper",
+          "Petroleum",
+          "Petroleum Bulk Terminals",
+          "Plastics and Rubber",
+          "Primary Metals",
+          "Transportation Equipment"
+        ]
+      }
+    }
+  },
+  "buffers": [
+    {
+      "url": "sid_data/inChicagoTrifac_gdf_cat_Beverages.json",
+      "count": 1,
+      "value": "Beverages",
+      "range": [
+        0,
+        1
+      ]
+    },
+    {
+      "url": "sid_data/inChicagoTrifac_gdf_cat_Chemical Wholesalers.json",
+      "count": 1,
+      "value": "Chemical Wholesalers",
+      "range": [
+        0,
+        1
+      ]
+    },
+    {
+      "url": "sid_data/inChicagoTrifac_gdf_cat_Chemicals.json",
+      "count": 10,
+      "value": "Chemicals",
+      "range": [
+        0,
+        1
+      ]
+    },
+    {
+      "url": "sid_data/inChicagoTrifac_gdf_cat_Computers and Electronic Products.json",
+      "count": 1,
+      "value": "Computers and Electronic Products",
+      "range": [
+        0,
+        1
+      ]
+    },
+    {
+      "url": "sid_data/inChicagoTrifac_gdf_cat_Electrical Equipment.json",
+      "count": 2,
+      "value": "Electrical Equipment",
+      "range": [
+        0,
+        1
+      ]
+    },
+    {
+      "url": "sid_data/inChicagoTrifac_gdf_cat_Fabricated Metals.json",
+      "count": 21,
+      "value": "Fabricated Metals",
+      "range": [
+        0,
+        1
+      ]
+    },
+    {
+      "url": "sid_data/inChicagoTrifac_gdf_cat_Food.json",
+      "count": 6,
+      "value": "Food",
+      "range": [
+        0,
+        1
+      ]
+    },
+    {
+      "url": "sid_data/inChicagoTrifac_gdf_cat_Hazardous Waste.json",
+      "count": 1,
+      "value": "Hazardous Waste",
+      "range": [
+        0,
+        1
+      ]
+    },
+    {
+      "url": "sid_data/inChicagoTrifac_gdf_cat_Miscellaneous Manufacturing.json",
+      "count": 1,
+      "value": "Miscellaneous Manufacturing",
+      "range": [
+        0,
+        1
+      ]
+    },
+    {
+      "url": "sid_data/inChicagoTrifac_gdf_cat_Nonmetallic Mineral Product.json",
+      "count": 10,
+      "value": "Nonmetallic Mineral Product",
+      "range": [
+        0,
+        1
+      ]
+    },
+    {
+      "url": "sid_data/inChicagoTrifac_gdf_cat_Paper.json",
+      "count": 1,
+      "value": "Paper",
+      "range": [
+        0,
+        1
+      ]
+    },
+    {
+      "url": "sid_data/inChicagoTrifac_gdf_cat_Petroleum.json",
+      "count": 2,
+      "value": "Petroleum",
+      "range": [
+        0,
+        1
+      ]
+    },
+    {
+      "url": "sid_data/inChicagoTrifac_gdf_cat_Petroleum Bulk Terminals.json",
+      "count": 1,
+      "value": "Petroleum Bulk Terminals",
+      "range": [
+        0,
+        1
+      ]
+    },
+    {
+      "url": "sid_data/inChicagoTrifac_gdf_cat_Plastics and Rubber.json",
+      "count": 1,
+      "value": "Plastics and Rubber",
+      "range": [
+        0,
+        1
+      ]
+    },
+    {
+      "url": "sid_data/inChicagoTrifac_gdf_cat_Primary Metals.json",
+      "count": 11,
+      "value": "Primary Metals",
+      "range": [
+        0,
+        1
+      ]
+    },
+    {
+      "url": "sid_data/inChicagoTrifac_gdf_cat_Transportation Equipment.json",
+      "count": 4,
+      "value": "Transportation Equipment",
+      "range": [
+        0,
+        1
+      ]
+    }
+  ]
+}
