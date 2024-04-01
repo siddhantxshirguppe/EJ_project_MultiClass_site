@@ -1,4 +1,13 @@
 /**
+Original code: https://github.com/socialtables/largest-rect-in-poly/blob/master/index.js
+
+Three modification:
+1) Ported to TypeScript
+2) Bumped to d3v4
+3) Used Simplify-ts instead of Simplify-js
+
+*/
+/**
  Return the largest rectangle inside the given polygon.
  @param poly Array of x, y coordinates describing a polygon, in the order in which those points should be drawn.
  @param options Object describing options, including:

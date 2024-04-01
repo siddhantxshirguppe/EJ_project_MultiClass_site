@@ -46,6 +46,64 @@
             border-radius: 5px;
             background: #eee;
         }
+
+        .checkbox-group {
+            display: flex;
+            background-color: lightblue;
+            gap: 10px;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+        }
+
+        #render {
+            padding: 10px 20px;
+            background-color: #ff6f00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px; /* Adjust the margin as per your design */
+        }
+
+        #render:hover {
+            background-color: #e65e00;
+        }
+   
+        /* Adjust the .container to handle the third box */
+        .container-vertical {
+            display: flex;
+            flex-direction: column; /* Stack flex items vertically */
+            align-items: center; /* Align items horizontally in the center */
+            gap: 10px;
+            padding: 10px; /* Add some padding around the container */
+        }
+        .container-horizontal {
+            display: flex;
+            flex-direction: row; /* Stack flex items vertically */
+            align-items: center; /* Align items horizontally in the center */
+            gap: 20px;
+            padding: 0px; /* Add some padding around the container */
+        }
+
+        .box {
+            width: 600px; /* Set a fixed width for all boxes */
+            /* Rest of the .box styles */
+        }
+
+        .text-input-group textarea {
+            width: 100%; /* Makes the textarea take the full width of its container */
+            height: 300px; /* Increased height to better accommodate longer text */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* Ensures padding does not affect the final dimensions */
+            background-color: #f9f9f9; /* Light background color */
+            resize: none; /* Prevent resizing */
+        }
+
     </style>
 </head>
 
@@ -63,51 +121,236 @@
         </div>
     </nav>
     <script src="sid_multiclass_density.js" type="module"></script>
-    <div>
-        <label for="Dataset">Dataset 1:</label>
-        <select id="dataset_01">
-            <option value="population">Population</option>
-            <option value="income">Income</option>
-            <option value="tri">tri</option>
-            <option value="trisec">trisec</option>
-            <option value="na" selected>NA</option>
-        </select>
+<div class="container-horizontal">
 
-        <label for="Dataset">Dataset 2:</label>
-        <select id="dataset_02">
-            <option value="population">Population</option>
-            <option value="income">Income</option>
-            <option value="tri">tri</option>
-            <option value="trisec">trisec</option>
-            <option value="na" selected>NA</option>
-        </select>
 
-        <label for="Compose">Compose:</label>
-        <select id="compose">
-            <option value="bars">bars</option>
-            <option value="punchcard">punchcard</option>
-            <option value="choropleth" selected>choropleth</option>
-            <option value="time" >time</option>
-            <option value="propline" >propline</option>
-            <option value="hatching" >hatching</option>
-            <option value="weaving-hex" >weaving-hex</option>
-            <option value="weaving-tri" >weaving-tri</option>
-            <option value="weaving-square" >weaving-square</option>
-            <option value="weaving-random" >weaving-random</option>
+    <div class="container-vertical">
 
-        </select>
+        <div class="box">
+            <label for="dataset1">Dataset 1</label>
+            <select id="dataset_01">
+                <option value="population">Population</option>
+                <option value="income">Income</option>
+                <option value="tri">TRI</option>
+                <!-- <option value="trisec">trisec</option> -->
+                <option value="race">race [STANDALONE]</option>
+                <option value="na" selected>NA</option>
+            </select>
+    
+            <label for="color1start">Color 1 Start</label>
+            <input type="color" id="colorset_01_s" name="color1start" value="#ffffff">
+    
+            <label for="color1end">End*</label>
+            <input type="color" id="colorset_01_e" name="color1end" value="#ff6f00">
+        </div>
+    
+        <div class="box">
+            <label for="dataset2">Dataset 2</label>
+            <select id="dataset_02">
+                <option value="population">Population</option>
+                <option value="income">Income</option>
+                <option value="tri">TRI</option>
+                <!-- <option value="trisec">trisec</option> -->
+                <option value="race">race [STANDALONE]</option>
+                <option value="na" selected>NA</option>
+            </select>
+    
+            <label for="color2start">Color 2 Start</label>
+            <input type="color" id="colorset_02_s" name="color2start" value="#ffffff">
+    
+            <label for="color2end">End*</label>
+            <input type="color" id="colorset_02_e" name="color2end" value="#ff6f00">
+        </div>
 
-        <button onclick="renderSpec()">RENDER</button>
+        <div class="container-horizontal">
+
+            <label for="Compose">Compose:</label>
+            <select id="compose">
+                <option value="bars">bars</option>
+                <option value="punchcard">punchcard</option>
+                <option value="choropleth" selected>choropleth</option>
+                <option value="time" >time</option>
+                <option value="propline" >propline</option>
+                <option value="hatching" >hatching</option>
+               <!-- 
+                <option value="weaving-hex" >weaving-hex</option>
+                <option value="weaving-tri" >weaving-tri</option>
+                <option value="weaving-square" >weaving-square</option>
+                -->
+                <option value="weaving-random" >weaving-random</option>
+            </select>
+
+            <button id="render" onclick="renderSpec()">RENDER</button>
+            <div class="checkbox-group">
+                <input type="checkbox" id="norm_switch" name="normalize">
+                <label for="normalize">NORMALIZE</label>
+            </div>   
+        </div>
+
+        <div class="box" id="scaleInfo">
+            <div class="text-input-group">
+                <textarea id="infoText" name="infoText" readonly>
+                    Scale Representation:
+                    - TRI (Toxic Release Inventory) values are on a 1:1 scale.
+                    - Population values are represented in multiples of 10,000.
+                    - Income values are represented in multiples of 10,000.
+                    - Race values are represented in multiples of 1000.
+
+                    Please interpret the chart data with these scales in mind.
+                </textarea>
+            </div>
+        </div>
+
+        <div class="box" id="normalizedInfo" style="display: none;">
+            <div class="text-input-group">
+                <textarea id="infoText" name="infoText" readonly>
+                    Normalized Data Representation:
+                    - TRI: 
+                        A minimum value of 0 represents 0%
+                        A maximum value of 10 represents 100%.
+                    - Income: 
+                        A minimum value of $16,905.85 represents 0%,
+                        A maximum value of $145,315.27 represents 100%.
+                    - Population: 
+                        A minimum value of 2,514 represents 0%
+                        A maximum value of 103,048 represents 100%.
+
+                    Please interpret the chart data with these normalization in mind.
+                </textarea>
+            </div>
+        </div>
+
     </div>
 
-    <div class="container pt-4">
+    <!--
+    <div class="container-vertical">
+
+        <div class="box">
+            <label for="dataset1">Dataset 1</label>
+            <select id="dataset_01">
+                <option value="population">Population</option>
+                <option value="income">Income</option>
+                <option value="tri">TRI</option>
+                <option value="na" selected>NA</option>
+            </select>
+    
+            <label for="color1start">Color 1 Start</label>
+            <input type="color" id="colorset_01_s" name="color1start" value="#ffffff">
+    
+            <label for="color1end">End*</label>
+            <input type="color" id="colorset_01_e" name="color1end" value="#ff6f00">
+        </div>
+    
+        <div class="box">
+            <label for="dataset2">Dataset 2</label>
+            <select id="dataset_02">
+                <option value="population">Population</option>
+                <option value="income">Income</option>
+                <option value="tri">TRI</option>
+                <option value="na" selected>NA</option>
+            </select>
+    
+            <label for="color2start">Color 2 Start</label>
+            <input type="color" id="colorset_02_s" name="color2start" value="#ffffff">
+    
+            <label for="color2end">End*</label>
+            <input type="color" id="colorset_02_e" name="color2end" value="#ff6f00">
+        </div>
+
+        <div class="container-horizontal">
+
+            <label for="Compose">Compose:</label>
+            <select id="compose">
+                <option value="bars">bars</option>
+                <option value="punchcard">punchcard</option>
+                <option value="choropleth" selected>choropleth</option>
+                <option value="time" >time</option>
+                <option value="propline" >propline</option>
+                <option value="hatching" >hatching</option>
+                <option value="weaving-random" >weaving-random</option>
+    
+            </select>
+
+                <button id="render" onclick="renderSpec()">RENDER</button>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="norm_switch" name="normalize">
+                    <label for="normalize">NORMALIZE</label>
+                </div>   
+        </div>
+
+        <div class="box" id="scaleInfo">
+            <div class="text-input-group">
+                <textarea id="infoText" name="infoText" readonly>
+Scale Representation:
+- TRI (Toxic Release Inventory) values are on a 1:1 scale.
+- Population values are represented in multiples of 10,000.
+- Income values are represented in multiples of 10,000.
+
+Please interpret the chart data with these scales in mind.
+                </textarea>
+            </div>
+        </div>
+
+            <div class="box" id="normalizedInfo" style="display: none;">
+                <div class="text-input-group">
+                    <textarea id="infoText" name="infoText" readonly>
+    Normalized Data Representation:
+    - TRI: 
+        A minimum value of 0 represents 0%
+        A maximum value of 10 represents 100%.
+    - Income: 
+        A minimum value of $16,905.85 represents 0%,
+        A maximum value of $145,315.27 represents 100%.
+    - Population: 
+        A minimum value of 2,514 represents 0%
+        A maximum value of 103,048 represents 100%.
+
+    Please interpret the chart data with these normalization in mind.
+                    </textarea>
+                </div>
+            </div>
+
+    </div>
+
+
+    -->
+    <div class="container-horizontal">
         <section id="gallery" class="row">
         </section>
+    
+        <!--
+        <section id="gallery_02" class="row">
+        </section>
+        -->
+    </div>
+
+    <div class="box" id="normalizedInfo">
+        <div class="text-input-group">
+            <textarea id="infoText" name="infoText" readonly>
+                Normalize option and Start end colors option  
+                currently not supported for race dataset
+            </textarea>
+        </div>
     </div>
 
 
+</div>
 
-
+    <script>
+        document.getElementById('norm_switch').addEventListener('change', function() {
+            console.log("checkbox sidbox called!!");
+            var scaleInfo = document.getElementById('scaleInfo');
+            var normalizedInfo = document.getElementById('normalizedInfo');
+        
+            if (this.checked) {
+                scaleInfo.style.display = 'none';
+                normalizedInfo.style.display = 'block';
+            } else {
+                scaleInfo.style.display = 'block';
+                normalizedInfo.style.display = 'none';
+            }
+        });
+    </script>
 
     <script src="dist/multiclass-density-maps.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
@@ -116,17 +359,24 @@
 
         $(function () {
             var $gallery = $('#gallery')
+            //var $gallery_02 = $('#gallery_02');
             var canvasCount = 0;
 
             function SVG() {
                 return document.createElementNS('http://www.w3.org/2000/svg', 'svg')
             }
 
-            function render(title, spec, wide, width, height, timeN) {
+            function render(gallery_num,title, spec, wide, width, height, timeN) {
                 console.log("sidlog render function called");
-                $gallery.find('.card').remove();
+                if(gallery_num === 1)
+                {
+                    $galleryElement = $('#gallery');
+                }else{
+                    $galleryElement = $('#gallery_02');
+                }
+                $galleryElement.find('.card').remove();
                 var
-                    $wrapper = $('<div></div>').attr('class', wide ? 'col-lg-12' : 'col-lg-4').appendTo($gallery),
+                    $wrapper = $('<div></div>').attr('class', wide ? 'col-lg-12' : 'col-lg-4').appendTo($galleryElement),
                     $card = $('<div class="card"></div>').appendTo($wrapper),
                     $title = $('<h5 class="card-header"></h5>').html(title).appendTo($card),
                     $body = $('<div class="card-body"></div>').appendTo($card),
@@ -159,396 +409,6 @@
                 });
             }
             window.render = render;
-
-/*        
-            render('Income Data', {
-                "data": { "url": "sid_data/population_income_datashader_data.json" },
-                "style": {
-                    "classes": [
-                        {
-                            "name": "population",
-                            "alias": "Population",
-                            "color0": "White",
-                            "color1": "Red"
-                        }
-                    ],
-
-                },
-                "rebin": {
-                    "type": "topojson",
-                    "url": "sid_data/Communities-Chicago.topojson",
-                    "feature": "Communities-Chicago",
-                    "aggregation":"sum",
-                    "stroke":"black"
-                },
-                
-                "smooth": {"radius": 1},
-                "rescale": {"type": "linear"},
-                "compose": {
-                    "mix": "mean",
-                    "size": 20
-                },
-                "legend":{
-                    "title":"hello"
-                }
-            }, true);
-
-            render('Population Data', {
-                //"data": { "url": "census.snappy_data.json" },
-                "data": { "url": "sid_data/population_datashader_data.json" },
-                "style": {
-                    "classes": [
-                        {
-                            "name": "2",
-                            "alias": "Population",
-                            "color0": "White",
-                            "color1": "Red"
-                        }
-                    ],
-
-                },
-                "rebin": {
-                    "type": "topojson",
-                    "url": "sid_data/Communities-Chicago.topojson",
-                    "feature": "Communities-Chicago",
-                    "aggregation":"sum",
-                    "stroke":"black"
-                },
-                
-                "smooth": {"radius": 1},
-                "rescale": {"type": "linear"},
-                "compose": {
-                    "mix": "mean",
-                    "size": 20
-                },
-                "legend":{
-                    "title":"hello"
-                }
-            }, true);
-
-            render('Population VS Income Data', {
-                //"data": { "url": "census.snappy_data.json" },
-                "data": { "url": "sid_data/population_income_datashader_data.json" },
-
-                "rebin": {
-                    "type": "topojson",
-                    "url": "sid_data/Communities-Chicago.topojson",
-                    "feature": "Communities-Chicago",
-                    "aggregation":"sum",
-                    "stroke":"black"
-                },
-                
-                "smooth": {"radius": 1},
-                "rescale": {"type": "linear"},
-                "compose": {
-                    "mix": "mean",
-                    "size": 20
-                },
-                "legend":{
-                    "title":"hello"
-                }
-            }, true);
-
-            render('Population VS Income Data', {
-                //"data": { "url": "census.snappy_data.json" },
-                "data": { "url": "sid_data/population_income_datashader_data.json" },
-                "rebin": {
-                    "type": "topojson",
-                    "url": "sid_data/Communities-Chicago.topojson",
-                    "feature": "Communities-Chicago",
-                    "aggregation":"sum",
-                    "stroke":"black"
-                },
-                
-                "smooth": {"radius": 1},
-                "rescale": {"type": "linear"},
-                "compose": {
-                "mix": "glyph",
-                "glyphSpec": {
-                "template": "punchcard",
-                    "height":"25",
-                    "width":"25"
-                    }
-                },
-                "legend":{
-                    "title":"hello"
-                }
-            }, true);
-            render('Population VS Income Data', {
-                //"data": { "url": "census.snappy_data.json" },
-                "data": { "url": "sid_data/population_income_datashader_data.json" },
-                "rebin": {
-                    "type": "topojson",
-                    "url": "sid_data/Communities-Chicago.topojson",
-                    "feature": "Communities-Chicago",
-                    "aggregation":"sum",
-                    "stroke":"black"
-                },
-                
-                "smooth": {"radius": 1},
-                "rescale": {"type": "linear"},
-                "compose": {
-                    "mix": "glyph",
-                    "glyphSpec": {
-                    "template": "bars",
-                    "width": 20,
-                    "height": 20
-                    }
-                },
-                "legend":{
-                    "title":"hello"
-                }
-            }, true);
-            render('TRI Sector Data', {
-                //"data": { "url": "census.snappy_data.json" },
-                "data": { "url": "sid_data/inChicagoTrifac_gdf_data.json" },
-                "rebin": {
-                    "type": "topojson",
-                    "url": "sid_data/Communities-Chicago.topojson",
-                    "feature": "Communities-Chicago",
-                    "aggregation":"sum",
-                    "stroke":"black"
-                },
-                "compose": {
-                    "mix": "mean",
-                    "size": 20
-                },
-                "rescale": {
-                    "type": "linear"
-                },
-            }, true);
-
-            render('TRI Sector Data', {
-                //"data": { "url": "census.snappy_data.json" },
-                "data": { "url": "sid_data/inChicagoTrifac_gdf_data.json" },
-                "rebin": {
-                    "type": "topojson",
-                    "url": "sid_data/Communities-Chicago.topojson",
-                    "feature": "Communities-Chicago",
-                    "aggregation":"sum",
-                    "stroke":"black"
-                },
-                "compose": {
-                    "mix": "time"
-                },
-                "rescale": {
-                    "type": "linear"
-                },
-            }, true);
-
-            render('Census Data', {
-                //"data": { "url": "census.snappy_data.json" },
-                "data": { "url": "sid_data/median_income_datashader_data.json" },
-                "style": {
-                    "classes": [
-                        {
-                            "name": "1",
-                            "alias": "White",
-                            "color0": "White",
-                            "color1": "Red"
-                        }
-                    ],
-
-                },
-                "rebin": {
-                    "type": "topojson",
-                    "url": "sid_data/Communities-Chicago.topojson",
-                    "feature": "Communities-Chicago",
-                    "aggregation":"density",
-                    "stroke": {
-                    "type": "topojson",
-                    "url": "sid_data/Communities-Chicago.topojson",
-                    "feature": "Communities-Chicago",
-                    "color": "rgba(0, 0, 0, 0.3)"
-                },
-                },
-
-            "smooth": {"radius": 1},
-                "rescale": {"type": "linear"},
-                "compose": {
-                    "mix": "glyph",
-                    "glyphSpec": {
-                        "template": "punchcard",
-                        "height":"20",
-                        "width":"20"
-                    }
-                }
-            }, true);
-*/
-            /*
-            render('Census Data (Class Reordered and Renamed)', {
-                "data": {
-                    "url": "census.snappy_data.json"
-                },
-                "style": {
-                    "classes": [
-                        {
-                            "name": "w",
-                            "alias": "White",
-                            "color0": "White",
-                            "color1": "Blue"
-                        },
-                        {
-                            "name": "h",
-                            "alias": "Hispanic",
-                            "color0": "White",
-                            "color1": "Orange"
-                        },
-                        {
-                            "name": "a",
-                            "alias": "Asian",
-                            "color0": "White",
-                            "color1": "Red"
-                        },
-                        {
-                            "name": "b",
-                            "alias": "Black",
-                            "color0": "White",
-                            "color1": "Green"
-                        },
-                        {
-                            "name": "o",
-                            "alias": "Other",
-                            "color0": "White",
-                            "color1": "Brown"
-                        },
-                    ],
-                    "scale": {
-                        "type": "log"
-                    }
-                },
-                "assembly": {
-                    "mix": "mean",
-                }
-            }, true);
-
-            render('Census Data Smoothed', {
-                "data": { "url": "census.snappy_data.json" },
-                "smooth": { "radius": 1 },
-                "compose": {
-                    "mix": "mean"
-                },
-                "rescale": {
-                    "type": "log"
-                }
-            }, true);
-
-            render('Census Data Random Weaving', {
-                "description": "US Census Synthetic people",
-                "data": { "url": "census.snappy_data.json" },
-                "rebin": {
-                    "type": "topojson",
-                    "url": "us.json",
-                    "feature": "states",
-                    "stroke": "rgba(0,0,0,0.25)"
-                },
-                "compose": {
-                    "mix": "weaving",
-                    "shape": "random",
-                    "size": 4
-                },
-                "rescale": {
-                    "type": "cbrt"
-                }
-            }, true);
-
-            render('Census Data Weaving', {
-                "description": "US Census Synthetic people",
-                "data": { "url": "census.snappy_data.json" },
-                "rebin": {
-                    "type": "topojson",
-                    "url": "us.json",
-                    "feature": "states",
-                    "stroke": "red"
-
-                },
-                "compose": {
-                    "mix": "weaving",
-                    "shape": "square",
-                    "size": 4
-                },
-                "rescale": {
-                    "type": "cbrt"
-                }
-            }, true);
-
-
-            render('Census Data Choropleth', {
-                "description": "US Census Synthetic people",
-                "data": { "url": "census.snappy_data.json" },
-                "rebin": {
-                    "type": "topojson",
-                    "url": "us.json",
-                    "feature": "states",
-                    "stroke": "white"
-
-                },
-                "compose": {
-                    "mix": "mean",
-                    "size": 2
-                },
-                "rescale": {
-                    "type": "cbrt"
-                }
-            }, true);
-
-            render('Census Data Multiplicative Choropleth', {
-                "description": "US Census Synthetic people",
-                "data": { "url": "census.snappy_data.json" },
-                "rebin": {
-                    "type": "topojson",
-                    "url": "us.json",
-                    "feature": "counties",
-                    "stroke": "rgba(255,255,255,0.1)"
-
-                },
-                "compose": {
-                    "mix": "blend",
-                    "blending": "multiplicative"
-                },
-                "rescale": {
-                    "type": "log"
-                }
-            }, true);
-
-
-                        render('Census Data Contour', {
-                            "description": "US Census Synthetic people",
-                            "data": { "url": "census.snappy_data.json" },
-                            "reencoding": {
-                                "label": {
-                                    "field": "z",
-                                    "type": "nominal",
-                                    "scale": {
-                                        "domain": ["w", "h", "a", "b", "o"],
-                                        "range": ["White", "Hispanic", "Asian", "Black", "Other"]
-                                    }
-                                },
-                                "color": {
-                                    "field": "z",
-                                    "type": "nominal",
-                                    "scale": {
-                                        "range": ["Blue", "Orange", "Red", "Green", "Brown"]
-                                    }
-                                }
-                            },
-                            "rebin": {
-                                "type": "topojson",
-                                "url": "us.json",
-                                "feature": "states",
-                                "stroke": "grey"
-            
-                            },
-                            "rescale": {
-                                "type": "cbrt"
-                            },
-                            "contour": {
-                                "stroke": 5,
-                                "lineWidth": 1,
-                                "blur": 1
-                            }
-                        }, true);
-            */
         })
 
     </script>

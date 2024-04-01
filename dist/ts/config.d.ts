@@ -40,9 +40,9 @@ export interface DataBufferSpec {
 }
 export declare class GeoSpec {
     projection: string;
-    latitudes: [number, number] | undefined;
-    longitudes: [number, number] | undefined;
-    proj4: string | undefined;
+    latitudes?: [number, number] | undefined;
+    longitudes?: [number, number] | undefined;
+    proj4?: string | undefined;
     constructor(projection?: string, latitudes?: [number, number] | undefined, longitudes?: [number, number] | undefined, proj4?: string | undefined);
 }
 export declare class SchemaSpec {
@@ -214,24 +214,24 @@ export declare class Config {
     stroke?: StrokeSpec;
     axis?: AxisSpec;
     constructor(spec: any);
-    private parseDescription();
-    private parseBackground();
-    private parsePreprocess();
-    private parseData();
-    private parseStyle();
-    private parseContour();
-    private parseReencoding();
-    private parseRebin();
-    private parseAssembly();
-    private parseRescale();
-    private parseLegend();
-    private parseStroke();
-    private parseAxis();
+    private parseDescription;
+    private parseBackground;
+    private parsePreprocess;
+    private parseData;
+    private parseStyle;
+    private parseContour;
+    private parseReencoding;
+    private parseRebin;
+    private parseAssembly;
+    private parseRescale;
+    private parseLegend;
+    private parseStroke;
+    private parseAxis;
     validate(): boolean;
-    private loadTopojson(base, useCache?);
-    private loadStroke(base, useCache?);
-    private loadData(base, useCache?);
-    private loadDataJson(data);
+    private loadTopojson;
+    private loadStroke;
+    private loadData;
+    private loadDataJson;
     load(base: string, useCache?: boolean): Promise<Config>;
     loadJson(data: any): Promise<Config>;
     getDataBuffers(): DataBuffer[];

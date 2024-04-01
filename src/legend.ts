@@ -465,15 +465,19 @@ function bars(dest:SVGSVGElement, interp:Interpreter) {
     });
 
     let glyphSpec = interp.config.assembly!.glyphSpec!;
-
+    console.log("sidlog"+interp.d3scale);
     let barSpec:any = {
-        $schema: "https://vega.github.io/schema/vega-lite/v2.0.json",
+        $schema: "https://vega.github.io/schema/vega-lite/v5.0.json",
         data: {
             values: data
         },
         mark: {
             type: "bar"
         },
+        "title": {
+            "text": "Class",
+            "anchor": "start" // optional, adjust as needed
+          },
         encoding: {
             x: {
                 field: "category",
@@ -491,10 +495,12 @@ function bars(dest:SVGSVGElement, interp:Interpreter) {
             color: {
                 field: "category",
                 type: "ordinal",
+                
                 scale: {
                   domain: data.map(d => d.category),
                   range: data.map((d, i) => derivedBuffers[i].color1!.css())
                 },
+
                 legend: {
                     orient: "top"
                 }
@@ -504,26 +510,31 @@ function bars(dest:SVGSVGElement, interp:Interpreter) {
                 type: "quantitative",
                 scale: {
                     type: interp.d3scale,
-                    base: interp.d3scale === "log" ? interp.d3base : undefined,
-                    exponent: interp.d3scale === "pow" ? interp.d3exponent : undefined,
+                    //base: interp.d3scale === "log" ? interp.d3base : undefined,
+                    //exponent: interp.d3scale === "pow" ? interp.d3exponent : undefined,
                     domain: domain,
-                    range: [glyphSpec.height, 0]
+                    range: [100, 0]
                 },
-                // legend: false,
-                axis: {
+                "legend": true,
+                "axis": {
                     orient: "right",
-                    title: false,
-                    format: ",.2s"
-                }
+                    title: "test legend",
+                    format: ",.2s",
+                    ticks: true, // Show ticks
+                    tickCount: 10,
+                    labels: true, // Show labels
+                    labelOverlap: true, // Prevent labels from overlapping
+                    "grid": true, "tickBand": "extent"
+                  }
             }
         },
         config: {
             group: {
-                strokeWidth: 0
+                strokeWidth: 1
             }
         },
-        width: glyphSpec.width,
-        height: glyphSpec.height
+        width: 100,
+        height: 100
     };
 
     let wrapper = document.createElement('div') as HTMLElement;

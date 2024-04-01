@@ -153,7 +153,7 @@ class CanvasRenderer {
             show.style('display', 'inline');
             target = (target + 1) % n;
         }
-        setInterval(repeat, interval * 1000);
+        setInterval(repeat, interval * 3000);
         return canvases[0].getContext('2d'); // TODO only returns the first context
     }
     static renderMultiples(images, id, order, options = {}) {

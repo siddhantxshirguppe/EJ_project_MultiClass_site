@@ -102,8 +102,8 @@ class Assembly {
                 x: {
                     field: "name",
                     type: "ordinal",
-                    legend: false,
-                    axis: false
+                    "legend": null,
+                    "axis": null
                 },
                 color: {
                     field: "name",
@@ -113,7 +113,7 @@ class Assembly {
                         range: data.map((d, i) => buffers[i].color1.css())
                         // will use a fully opaque color, since we use the length encoding
                     },
-                    legend: false
+                    "legend": false
                 },
                 y: {
                     field: "value",
@@ -124,8 +124,8 @@ class Assembly {
                         base: options["y.scale.type"] === "log" ? options["y.scale.base"] : undefined,
                         exponent: options["y.scale.type"] === "pow" ? options["y.scale.exponent"] : undefined
                     },
-                    lgend: false,
-                    axis: false
+                    "legend": true,
+                    "axis": null
                 }
             },
             config: {
@@ -133,8 +133,8 @@ class Assembly {
                     strokeWidth: 0
                 }
             },
-            width: options.width || 30,
-            height: options.height || 30,
+            width: options.width || 60,
+            height: options.height || 60,
             padding: 0
         };
         return vega_extractor_1.default(spec);
@@ -184,8 +184,8 @@ class Assembly {
                 x: {
                     field: "col",
                     type: "ordinal",
-                    axis: false,
-                    legend: false,
+                    "axis": null,
+                    "legend": null,
                     scale: {
                         type: "point",
                         domain: util.arange(cols),
@@ -195,8 +195,8 @@ class Assembly {
                 y: {
                     field: "row",
                     type: "ordinal",
-                    axis: false,
-                    legend: false,
+                    "axis": null,
+                    "legend": null,
                     scale: {
                         type: "point",
                         domain: util.arange(rows),
@@ -211,7 +211,7 @@ class Assembly {
                         type: options["z.scale.type"],
                         range: [0, Math.min(width, height) * factor]
                     },
-                    legend: false
+                    "legend": null,
                 },
                 color: {
                     field: "name",
@@ -220,13 +220,13 @@ class Assembly {
                         domain: names,
                         range: colors
                     },
-                    legend: false
+                    "legend": null,
                 }
             },
             autosize: "none",
             config: {
                 mark: {
-                    opacity: 1
+                    opacity: 1.0
                 },
                 group: {
                     strokeWidth: 0,
