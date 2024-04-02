@@ -1,3 +1,5 @@
+npm --version
+10.2.4
 # Multiclass Density Maps
 
 ![teaser](https://raw.githubusercontent.com/e-/Multiclass-Density-Maps/master/teaser.png?raw=true)
