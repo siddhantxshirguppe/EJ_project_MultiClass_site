@@ -23,7 +23,7 @@ function generateFinalDataset()
             "classes": [
                 {
                     "name": "class_"+(dataset_01 === 'na' ? dataset_02 : dataset_01),
-                    "alias": "class_"+(dataset_01 === 'na' ? dataset_02 : dataset_01),
+                    "alias": (dataset_01 === 'na' ? dataset_02 : dataset_01),
                     "color0": (dataset_01 === 'na' ? colorset_02_s : colorset_01_s),
                     "color1": (dataset_01 === 'na' ? colorset_02_e : colorset_01_e)
                 }
@@ -38,7 +38,7 @@ function generateFinalDataset()
             "classes": [
                 {
                     "name": "class_"+dataset_final,
-                    "alias": "class_"+dataset_final,
+                    "alias": dataset_final,
                     "color0":  colorset_01_s,
                     "color1": colorset_01_e
                 }
@@ -56,13 +56,13 @@ function generateFinalDataset()
             "classes": [
                 {
                     "name": "class_"+dataset_01,
-                    "alias": "class_"+dataset_01,
+                    "alias": dataset_01,
                     "color0":  colorset_01_s,
                     "color1": colorset_01_e
                 },
                 {
                     "name": "class_"+dataset_02,
-                   "alias": "class_"+dataset_02,
+                   "alias": dataset_02,
                     "color0":  colorset_02_s,
                     "color1": colorset_02_e
                 }

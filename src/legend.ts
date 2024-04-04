@@ -486,7 +486,7 @@ function bars(dest:SVGSVGElement, interp:Interpreter) {
                 sort: null,
                 axis: {
                     orient: "top",
-                    title: "value",
+                    title: "categories",
                     domain: false,
                     ticks: false,
                     labels: false
@@ -518,7 +518,7 @@ function bars(dest:SVGSVGElement, interp:Interpreter) {
                 "legend": true,
                 "axis": {
                     orient: "right",
-                    title: "test legend",
+                    title: "values  ",
                     format: ",.2s",
                     ticks: true, // Show ticks
                     tickCount: 10,
